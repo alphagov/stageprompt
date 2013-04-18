@@ -43,7 +43,7 @@ GOVUK.performance.addToNamespace("stageprompt", (function () {
           privateMethods.addStartStringToCookie(nodeWithJourneyTag.getAttribute("data-journey"));
         };
       } 
-      else {
+      else if (nodeWithJourneyTag.nodeName === "BODY") {
         analyticsService(nodeWithJourneyTag.getAttribute("data-journey"));
       }
     }
