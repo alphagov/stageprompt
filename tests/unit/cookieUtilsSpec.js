@@ -31,12 +31,6 @@ describe("cookie utils", function () {
   });
   
   
-  it("should convert strings that look suspiciously like arrays into arrays", function () {
-    var arrayFromString = cookieUtils.arrayify('foo');
-    expect(arrayFromString[0]).toBe('foo');
-  });
-  
-  
   it("should set a cookie", function () {
     cookieUtils.setSessionCookie({key:"name", value:"foo"});
     expect(document.cookie).toContain("name=foo");

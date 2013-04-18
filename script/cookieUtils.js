@@ -4,7 +4,7 @@
 
 GOVUK.performance.addToNamespace("cookieUtils", (function () {
   
-  var cookiesAsKeyValues, getCookieNamed, setSessionCookie, deleteCookieNamed, arrayify; 
+  var cookiesAsKeyValues, getCookieNamed, setSessionCookie, deleteCookieNamed; 
   
   
   cookiesAsKeyValues = function () {
@@ -41,17 +41,11 @@ GOVUK.performance.addToNamespace("cookieUtils", (function () {
   };
 
 
-  arrayify = function (obj) {
-    return (Object.prototype.toString.call(obj) !== '[object Array]') ? [obj] : obj;
-  };
-
-
   return {
     cookiesAsKeyValues: cookiesAsKeyValues,
     getCookieNamed: getCookieNamed,
     setSessionCookie: setSessionCookie,
-    deleteCookieNamed: deleteCookieNamed,
-    arrayify: arrayify
+    deleteCookieNamed: deleteCookieNamed
   };
 
 }()));
