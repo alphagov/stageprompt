@@ -6,17 +6,9 @@ describe("namespacing", function () {
   });
   
   
-  it("should throw an exception if the name already exists and not add to the namespace", function () {
+  it("should not add to the name is already taken", function () {
     expect(function () { GOVUK.performance.addToNamespace("foo", "blah blah blah"); })
-      .toThrow(new Error("There is already a key: 'foo' in the namespace."));
     expect(GOVUK.performance.foo()).toBe("bar");
   });
-  
-  
-  it("should remove namespace helpers when closed", function () {
-    GOVUK.performance.close();
-    expect(function () { GOVUK.performance.addToNamespace("test", {}); }).toThrow("Property 'addToNamespace' of object #<Object> is not a function");
-    expect(function () { GOVUK.performance.close(); }).toThrow("Property 'close' of object #<Object> is not a function");
-  });
-  
+
 });
