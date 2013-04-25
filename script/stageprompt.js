@@ -31,7 +31,7 @@ GOVUK.performance.addToNamespace("stageprompt", (function () {
   
     privateMethods.sendCookieEvents();
   
-    var nodeWithJourneyTag = Sizzle("[data-journey]")[0],
+    var nodeWithJourneyTag = GOVUK.performance.getElementsByAttribute("data-journey")[0],
       oldOnclick;
     if (nodeWithJourneyTag) {
       if (nodeWithJourneyTag.nodeName === "A") {
