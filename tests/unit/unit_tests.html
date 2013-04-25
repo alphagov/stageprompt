@@ -10,19 +10,20 @@
 <body>
 	<div id="sandbox"></div>
 	
-    <script type="text/javascript" src="../../script/ext/sizzle.js"></script>
-	
+    <script type="text/javascript" src="../lib/sizzle.js"></script>
     <script type="text/javascript" src="../lib/jasmine-1.3.1/jasmine.js"></script>
     <script type="text/javascript" src="../lib/jasmine-1.3.1/jasmine-html.js"></script>
 
     <!-- include source files here... -->
     <script type="text/javascript" src="../../script/namespace.js"></script>
+    <script type="text/javascript" src="../../script/patch.js"></script>
+	<script type="text/javascript" src="../stubAnalyticsService.js"></script>
     <script type="text/javascript" src="../../script/cookieUtils.js"></script>
     <script type="text/javascript" src="../../script/stageprompt.js"></script>
 
     <!-- include spec files here... -->
     <script type="text/javascript" src="namespaceSpec.js"></script>
-    <script type="text/javascript" src="../stubAnalyticsService.js"></script>
+	<script type="text/javascript" src="getElementsByAttributeSpec.js"></script>
     <script type="text/javascript" src="stagepromptSpec.js"></script>
     <script type="text/javascript" src="cookieUtilsSpec.js"></script>
 

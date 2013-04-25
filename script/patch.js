@@ -1,4 +1,6 @@
 /*jslint indent: 2 */
+/*global GOVUK: true*/
+/*global document: true*/
 // https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/keys
 
 if (!Object.keys) {
@@ -41,3 +43,25 @@ if (!Object.keys) {
     };
   }());
 }
+
+GOVUK.performance.addToNamespace("getElementsByAttributeFallback", function (attr) {
+  var elements = document.getElementsByTagName('*'), i = 0, results = [];
+  for (i = 0; i < elements.length; (i += 1)) {
+    if (elements[i].getAttribute(attr)) {
+      results.push(elements[i]);
+    }
+  }
+  return results;
+});
+
+GOVUK.performance.addToNamespace("getElementsByAttribute", function (attr) {
+  var results;
+  
+  if (document.querySelectorAll) {
+    results = document.querySelectorAll('[' + attr + ']');
+  } else {
+    results = GOVUK.performance.getElementsByAttributeFallback(attr);
+  }
+  
+  return results;
+});
