@@ -8,8 +8,8 @@ GOVUK.performance.addToNamespace("cookieUtils", (function () {
   
   
   cookiesAsKeyValues = function () {
-    var bakedCookies = [], rawCookies = document.cookie.split(';'), i = 0, keyValue;
-    for (i = 0; i < rawCookies.length; (i += 1)) {
+    var bakedCookies = [], rawCookies = document.cookie.split(';'), i = 0, len, keyValue;
+    for (i = 0, len = rawCookies.length; i < len; (i += 1)) {
       keyValue = rawCookies[i].split('=');
       bakedCookies.push({
         key: keyValue[0].trim(),
@@ -21,8 +21,8 @@ GOVUK.performance.addToNamespace("cookieUtils", (function () {
 
 
   getCookieNamed = function (name) {
-    var allCookies = cookiesAsKeyValues(), i = 0;
-    for (i = 0; i < allCookies.length; (i += 1)) {
+    var allCookies = cookiesAsKeyValues(), i = 0, len;
+    for (i = 0, len = allCookies.length; i < len; (i += 1)) {
       if (allCookies[i].key === name) {
         return allCookies[i];
       }
