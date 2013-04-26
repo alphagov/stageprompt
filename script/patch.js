@@ -46,7 +46,7 @@ if (!Object.keys) {
 
 GOVUK.performance.addToNamespace("getElementsByAttributeFallback", function (attr) {
   var elements = document.getElementsByTagName('*'), i = 0, results = [];
-  for (i = 0; i < elements.length; (i += 1)) {
+  for (i = 0, len = elements.length; i < len; (i += 1)) {
     if (elements[i].getAttribute(attr)) {
       results.push(elements[i]);
     }
