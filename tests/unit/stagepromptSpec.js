@@ -1,5 +1,9 @@
 describe("stageprompt", function () {
-  
+
+  beforeEach(function() {
+    document.cookie = "journey_events=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+  });
+
   afterEach(function () {
     document.getElementById('sandbox').innerHTML = "";
   });
@@ -49,6 +53,17 @@ describe("stageprompt", function () {
       expect(document.cookie).toContain('journey_events=test-journey:start');
     });
     
+    it("should add a journey string to the cookie when a button with journey data attribute is clicked", function () {
+      document.getElementById("sandbox").innerHTML += "<button id='test_elem' data-journey='a-step-in-user-journey'>Link</a>";
+      GOVUK.performance.stageprompt.setup({
+        analyticsFunction: function () {}
+      });
+
+      document.getElementById("test_elem").click();
+
+      expect(document.cookie).toContain('journey_events=a-step-in-user-journey');
+    });
+
     it("should not overwrite other onclick functions", function () {
       document.getElementById("sandbox").innerHTML += "<a id='link' data-journey='test-journey:start'>Link</a>";      
       spy = jasmine.createSpy();

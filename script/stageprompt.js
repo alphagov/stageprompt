@@ -34,7 +34,7 @@ GOVUK.performance.addToNamespace("stageprompt", (function () {
     var nodeWithJourneyTag = GOVUK.performance.getElementsByAttribute("data-journey")[0],
       oldOnclick;
     if (nodeWithJourneyTag) {
-      if (nodeWithJourneyTag.nodeName === "A") {
+      if (nodeWithJourneyTag.nodeName === "A" || nodeWithJourneyTag.nodeName === "BUTTON") {
         oldOnclick = nodeWithJourneyTag.onclick;
         nodeWithJourneyTag.onclick = function () {
           if (oldOnclick) {
