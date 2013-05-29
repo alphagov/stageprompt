@@ -8,7 +8,7 @@
     - `gem install juicer`
     - `juicer install JsLint`
     - `juicer install closure_compiler`
-2. Add any new dependencies to `release_templates/lightGateTemplate.js`
+2. Add any new dependencies to `release_templates/stagepromptTemplate.js`
 3. In the `stageprompt` directory run `juicer merge -m "closure_compiler" -o "release/stageprompt.VERSION.min.js" release_templates/stagepromptTemplate.js` and 
 `juicer merge -o "release/stageprompt.VERSION.js" release_templates/stagepromptTemplate.js`. Make sure that you bump the version number as appropriate. This will
 run JsLint against your code and then minify and combine as necessary.
