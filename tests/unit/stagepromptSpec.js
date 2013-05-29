@@ -15,56 +15,6 @@ describe("stageprompt", function () {
     });
     // should not blow up
   });
-    
-  describe("sending events from cookies and then delete them", function () {
-
-    it("should send events", function () {
-      GOVUK.performance.cookieUtils.setSessionCookie(
-        {key: "journey_events", value: "test-journey:start"}
-      );
-
-      GOVUK.performance.stageprompt
-        .setup({
-          analyticsFunction: stubAnalyticsService.post
-        });
-
-      expect(stubAnalyticsService.count()).toBe(1);
-      expect(stubAnalyticsService.messages()[0]).toBe("test-journey:start");
-      expect(document.cookie).not.toContain("journey_events=test-journey:start");
-    });
-      
-  });
-  
-  
-  describe("journey events from clicks", function () {
-  
-    it("should add a start string to the cookie when the link is clicked", function () {
-      document.getElementById("sandbox").innerHTML += "<a id='link' data-journey='test-journey:start'>Link</a>";      
-      GOVUK.performance.stageprompt.setup({
-        analyticsFunction: function () {}
-      });
-      
-      document.getElementById("link").click();
-      
-      expect(document.cookie).toContain('journey_events=test-journey:start');
-    });
-    
-    it("should not overwrite other onclick functions", function () {
-      document.getElementById("sandbox").innerHTML += "<a id='link' data-journey='test-journey:start'>Link</a>";      
-      spy = jasmine.createSpy();
-      document.getElementById("link").onclick = spy;
-      
-      GOVUK.performance.stageprompt.setup({
-        analyticsFunction: function () {}
-      });
-      
-      document.getElementById("link").click();
-      
-      expect(spy).toHaveBeenCalled();
-    });
-    
-  });
-  
   
   describe("journey events from landing on a page", function () {
     
