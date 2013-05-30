@@ -1,20 +1,22 @@
-/*global GOVUK: true*/
-/*global Sizzle: true*/
 /*jslint indent: 2 */
 
-GOVUK.performance.addToNamespace("stageprompt", (function () {
+var GOVUK = GOVUK || {};
+
+GOVUK.performance = GOVUK.performance || {};
+
+GOVUK.performance.stageprompt = (function () {
   var setup;
 
-  setup = function (config) {
+  setup = function (analyticsCallback) {
     /*jslint newcap: false*/
 
-    var nodeWithJourneyTag = GOVUK.performance.getElementsByAttribute("data-journey")[0];
-    if (nodeWithJourneyTag) {
-      config.analyticsFunction(nodeWithJourneyTag.getAttribute("data-journey"));
+    var journeyStage = $('[data-journey]').attr('data-journey');
+    if (journeyStage) {
+      analyticsCallback(journeyStage);
     }
   };
 
   return {
     setup: setup
   };
-}()));
+}());
