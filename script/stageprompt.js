@@ -1,4 +1,5 @@
 /*jslint indent: 2 */
+/*global $ */
 
 var GOVUK = GOVUK || {};
 
@@ -8,8 +9,6 @@ GOVUK.performance.stageprompt = (function () {
   var setup;
 
   setup = function (analyticsCallback) {
-    /*jslint newcap: false*/
-
     var journeyStage = $('[data-journey]').attr('data-journey');
     if (journeyStage) {
       analyticsCallback(journeyStage);
