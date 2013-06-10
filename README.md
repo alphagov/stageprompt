@@ -14,7 +14,15 @@ up via `python -m SimpleHTTPServer` for a more realistic testing environment.
 
 ## Example
 
-Set up `stageprompt.js`.
+Include `stageprompt.js` in your HTML, and set it up by running something like:
+
+    $(function () {
+      GOVUK.performance.stageprompt.setup(function (journeyStage) {
+        _gaq.push(['_trackEvent', journeyStage , 'n/a', undefined, undefined, true]);
+      })
+    });
+
+...in your page to send journeys to Google Analytics, for example.
 
 Add `data-journey` attributes to your HTML to indicate the flow of your
 transaction. For example:
