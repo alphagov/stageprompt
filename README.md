@@ -1,11 +1,39 @@
 # stageprompt.js
 
-`stageprompt.js` is a javascript snippet for wiring up a user journey to an analytics service. Examples to follow.
+`stageprompt.js` is a JavaScript snippet for wiring up a user journey to an
+analytics service.
 
 ## Dependencies
 
 - jQuery (currently mirroring the version from https://github.com/alphagov/static/tree/master/app/assets/javascripts/libs/jquery)
 
-## How to run tests:
+## Running tests
 
-Run open `unit_tests.html` in your desired browser, you might want to serve files up via `python -m SimpleHTTPServer` for a more realistic testing environment.
+Open `unit_tests.html` in your desired browser. You might want to serve files
+up via `python -m SimpleHTTPServer` for a more realistic testing environment.
+
+## Example
+
+Set up `stageprompt.js`.
+
+Add `data-journey` attributes to your HTML to indicate the flow of your
+transaction. For example:
+
+On `/pay-register-birth-abroad/start`:
+
+    <div id="wrapper" class="service" data-journey="pay-register-birth-abroad:start">
+        [...]
+    </div>
+
+The user clicks "Calculate total" and is sent to `/pay-register-birth-abroad/confirm`:
+
+    <div id="wrapper" class="service" data-journey="pay-register-birth-abroad:confirm">
+        [...]
+    </div>
+
+After clicking "Pay" and entering their details at the provider's site, the
+user is redirected back to GOV.UK at `/pay-register-birth-abroad/done`:
+
+    <div id="wrapper" class="service" data-journey="pay-register-birth-abroad:done">
+        [...]
+    </div>
