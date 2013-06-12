@@ -28,7 +28,7 @@ describe("stageprompt", function () {
       document.getElementById('sandbox').innerHtml = "";
     });
 
-    it("should send an event if the page has a journey-data tag on the body", function () {
+    it("should send an event if the page has a data-journey tag on the body", function () {
       document.getElementsByTagName('body')[0].setAttribute('data-journey', 'test-journey:someStage');
       var spy = jasmine.createSpy();
       GOVUK.performance.stageprompt.setup(analyticsCallback);
@@ -36,7 +36,7 @@ describe("stageprompt", function () {
       expect(analyticsCallback).toHaveBeenCalledWith("test-journey:someStage");
     });
 
-    it("should send an event if the page has a journey-data tag on another tag", function () {
+    it("should send an event if the page has a data-journey tag on another tag", function () {
       document.getElementById('sandbox').setAttribute('data-journey', 'test-journey:nextStep');
 
       GOVUK.performance.stageprompt.setup(analyticsCallback);
