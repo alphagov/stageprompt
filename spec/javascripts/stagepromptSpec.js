@@ -56,6 +56,18 @@ describe("stageprompt", function () {
 
       expect(analyticsCallback.callCount).toBe(1);
     });
+
+  })
+  
+  describe("sending events for helper tags", function () {
+    beforeEach(function () {
+      analyticsCallback = jasmine.createSpy();
+      $("<div id='sandbox'></div>").appendTo('body');
+    });
+
+    afterEach(function () {
+      $('#sandbox').remove();
+    });
     
     it("should send an event when a help link is clicked", function () {
       $('#sandbox').attr('data-journey-helper', 'test-journey:stuff:help');
@@ -65,6 +77,27 @@ describe("stageprompt", function () {
       
       expect(analyticsCallback).toHaveBeenCalledWith("test-journey:stuff:help");
     });
-
-  })
+    
+    it("should send events for multiple help elements on the same page", function () {
+      $('#sandbox').append('<a href="#" id="1" data-journey-helper="a">foo</a>');
+      $('#sandbox').append('<a href="#" id="2" data-journey-helper="b">bar</a>');
+      
+      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      $('#1').click();
+      $('#2').click();
+      
+      expect(analyticsCallback).toHaveBeenCalledWith("a");
+      expect(analyticsCallback).toHaveBeenCalledWith("b");
+    });
+    
+    it("should send one event per click on tagged item", function () {
+      $('#sandbox').append('<a href="#" id="1" data-journey-helper="a">foo</a>');  
+      GOVUK.performance.stageprompt.setup(analyticsCallback);
+    
+      $('#1').click();
+      $('#1').click();
+      
+      expect(analyticsCallback.callCount).toBe(2);
+    });
+  });
 });
