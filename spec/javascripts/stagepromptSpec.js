@@ -1,7 +1,11 @@
 describe("stageprompt", function () {
+  beforeEach(function () {
+    $("<div id='sandbox'></div>").appendTo('body');
+  });
 
   afterEach(function () {
-    document.getElementById('sandbox').innerHTML = "";
+    $("#sandbox").remove();
+    // document.getElementById('sandbox').innerHTML = "";
   });
 
   it("should exist in a namespace", function () {
@@ -20,16 +24,16 @@ describe("stageprompt", function () {
     
     beforeEach(function () {
       analyticsCallback = jasmine.createSpy();
+      $("<div id='sandbox'></div>").appendTo('body');
     });
 
     afterEach(function () {
-      document.getElementsByTagName('body')[0].removeAttribute('data-journey');
-      document.getElementById('sandbox').removeAttribute('data-journey');
-      document.getElementById('sandbox').innerHtml = "";
+      $('#sandbox').remove();
+      $('[data-journey]').removeAttr('data-journey');
     });
 
     it("should send an event if the page has a data-journey tag on the body", function () {
-      document.getElementsByTagName('body')[0].setAttribute('data-journey', 'test-journey:someStage');
+      $('body').attr('data-journey', 'test-journey:someStage');
       var spy = jasmine.createSpy();
       GOVUK.performance.stageprompt.setup(analyticsCallback);
 
@@ -37,7 +41,7 @@ describe("stageprompt", function () {
     });
 
     it("should send an event if the page has a data-journey tag on another tag", function () {
-      document.getElementById('sandbox').setAttribute('data-journey', 'test-journey:nextStep');
+      $('#sandbox').attr('data-journey', 'test-journey:nextStep');
 
       GOVUK.performance.stageprompt.setup(analyticsCallback);
 
@@ -45,13 +49,21 @@ describe("stageprompt", function () {
     });
 
     it("should send one event if the page has multiple elements with data-journey attribute", function () {
-      document.getElementById('sandbox').setAttribute('data-journey', 'test-journey:stuff');
-      document.getElementById('sandbox').innerHTML = 
-        "<p id='foo' data-journey='test-journey:moreStuff'>something</p>";
+      $('#sandbox').attr('data-journey', 'test-journey:stuff');
+      $('#sandbox').html("<p id='foo' data-journey='test-journey:moreStuff'>something</p>");
 
       GOVUK.performance.stageprompt.setup(analyticsCallback);
 
       expect(analyticsCallback.callCount).toBe(1);
+    });
+    
+    it("should send an event when a help link is clicked", function () {
+      $('#sandbox').attr('data-journey-helper', 'test-journey:stuff:help');
+      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      
+      $('#sandbox').click();
+      
+      expect(analyticsCallback).toHaveBeenCalledWith("test-journey:stuff:help");
     });
 
   })
