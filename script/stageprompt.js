@@ -6,7 +6,7 @@ var GOVUK = GOVUK || {};
 GOVUK.performance = GOVUK.performance || {};
 
 GOVUK.performance.stageprompt = (function () {
-  var setup;
+  var setup, setUpForGoogleAnalytics;
 
   setup = function (analyticsCallback) {
     var journeyStage = $('[data-journey]').attr('data-journey'),
@@ -21,8 +21,13 @@ GOVUK.performance.stageprompt = (function () {
       });
     }
   };
+  
+  setupForGoogleAnalytics = function () {
+    setup(GOVUK.performance.sendGoogleAnalyticsEvent);
+  };
 
   return {
-    setup: setup
+    setup: setup,
+    setupForGoogleAnalytics: setupForGoogleAnalytics
   };
 }());

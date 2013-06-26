@@ -100,4 +100,25 @@ describe("stageprompt", function () {
       expect(analyticsCallback.callCount).toBe(2);
     });
   });
+  
+  describe("out-of-the-box Google Analytics setup", function () {
+    _gaq = [];
+    
+    beforeEach(function () {
+      spyOn(_gaq, 'push');
+      $('<div id="sandbox"></div>').appendTo('body');
+    });
+    
+    afterEach(function () {
+      $('#sandbox').remove();
+    });
+    
+    it("should get set up to send events to google analytics", function () {
+      $('#sandbox').append('<div id="box" data-journey="thisIsATest"></div>');
+      
+      GOVUK.performance.stageprompt.setupForGoogleAnalytics();
+      
+      expect(_gaq.push).toHaveBeenCalled();
+    });
+  });
 });
