@@ -24,8 +24,8 @@ describe("Google Analytics callback", function () {
     
     expect(category).toEqual('stagePrompt');
     expect(action).toEqual('test event');
-    expect(label).toEqual(null);
-    expect(value).toEqual(null);
+    expect(label).toBe(undefined);
+    expect(value).toBe(undefined);
     expect(nonInteraction).toEqual(true);
   })
 });
