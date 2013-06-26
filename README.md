@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/alphagov/stageprompt.png?branch=master)](https://travis-ci.org/alphagov/stageprompt?branch=master)
+
 # stageprompt.js
 
 `stageprompt.js` is a JavaScript snippet for wiring up a user journey to an
