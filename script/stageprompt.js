@@ -31,3 +31,7 @@ GOVUK.performance.stageprompt = (function () {
     setupForGoogleAnalytics: setupForGoogleAnalytics
   };
 }());
+
+GOVUK.performance.sendGoogleAnalyticsEvent = function (action) {
+  _gaq.push(['_trackEvent', 'stagePrompt', action, undefined, undefined, true]);
+};
