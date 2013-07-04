@@ -14,7 +14,7 @@ GOVUK.performance.stageprompt = (function () {
 
   setup = function (analyticsCallback) {
     var journeyStage = $('[data-journey]').attr('data-journey'),
-        journeyHelpers = $('[data-journey-helper]');
+        journeyHelpers = $('[data-journey-click]');
 
     if (journeyStage) {
       analyticsCallback.apply(null, splitAction(journeyStage));
@@ -22,7 +22,7 @@ GOVUK.performance.stageprompt = (function () {
     
     if (journeyHelpers.length) {
       journeyHelpers.on('click', function (event) {
-        analyticsCallback.apply(null, splitAction($(this).data('journey-helper')));
+        analyticsCallback.apply(null, splitAction($(this).data('journey-click')));
       });
     }
   };
