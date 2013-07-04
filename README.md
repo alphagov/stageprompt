@@ -23,9 +23,9 @@ Include `stageprompt.js` in your HTML, and set it up by providing a function to 
 Or configure the callback yourself. In the example below an event is sent to Google Analytics for each stage.
 
     $(function () {
-      GOVUK.performance.stageprompt.setup(function (journeyStage) {
-        _gaq.push(['_trackEvent', journeyStage , 'n/a', undefined, undefined, true]);
-      })
+      GOVUK.performance.stageprompt.setup(function (category, event, label) {
+        _gaq.push(['_trackEvent', category, event, label, undefined, true]);
+      });
     });
 
 ## Sending events when a user reaches a page in your user journey
@@ -52,9 +52,9 @@ user is redirected back to GOV.UK at `/pay-register-birth-abroad/done`:
         [...]
     </div>
 
-## Sending events when a user uses help buttons
+## Sending events when a user clicks on a page element
 
-Add `data-journey-helper` attributes to the HTML for your help link or button. This will only work if the user is
+Add `data-journey-click` attributes to the element clicked by the user. This will only work if the user is
 not sent to a new page on click. Example:
 
-    <a class="help-button" href="#" data-journey-helper="stage:journey:helper">See more info...</a>
+    <a class="help-button" href="#" data-journey-click="stage:help:info">See more info...</a>
