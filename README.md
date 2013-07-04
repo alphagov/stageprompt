@@ -15,8 +15,21 @@ Latest version: [stageprompt.1.1.0.js](https://github.com/alphagov/stageprompt/r
 
 ## Running tests
 
-Open `unit_tests.html` in your desired browser. You might want to serve files
-up via `python -m SimpleHTTPServer` for a more realistic testing environment.
+You can run the tests using [Rake](http://rake.rubyforge.org/) and [Jasmine](http://pivotal.github.io/jasmine/). 
+
+Setup your environment:
+ 
+* Install Ruby 1.9.3
+* in the project folder, run: `bundle install`
+
+To run the tests in a browser:
+
+* run: `bundle exec rake jasmine`
+* open in your browser: [http://localhost:8888](http://localhost:8888)
+
+To run the tests from the command line:
+
+* run: `bundle exec rake jasmine:ci`
 
 ## Setup
 
