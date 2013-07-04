@@ -3,9 +3,10 @@ var GOVUK = GOVUK || {};
 GOVUK.performance = GOVUK.performance || {};
 
 GOVUK.performance.stageprompt = (function () {
-  var setup, setupForGoogleAnalytics;
 
-  var splitAction = function (action) {
+  var setup, setupForGoogleAnalytics, splitAction;
+
+  splitAction = function (action) {
     var parts = action.split(':');
     if (parts.length <= 3) return parts;
     return [parts.shift(), parts.shift(), parts.join(':')];
@@ -21,7 +22,7 @@ GOVUK.performance.stageprompt = (function () {
     
     if (journeyHelpers.length) {
       journeyHelpers.on('click', function (event) {
-        analyticsCallback($(this).data('journey-helper'));
+        analyticsCallback.apply(null, splitAction($(this).data('journey-helper')));
       });
     }
   };

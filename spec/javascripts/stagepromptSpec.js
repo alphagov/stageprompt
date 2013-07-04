@@ -114,7 +114,7 @@ describe("stageprompt", function () {
       
       $('#sandbox').click();
       
-      expect(analyticsCallback).toHaveBeenCalledWith("test-journey:stuff:help");
+      expect(analyticsCallback).toHaveBeenCalledWith("test-journey", "stuff", "help");
     });
     
     it("should send events for multiple help elements on the same page", function () {
