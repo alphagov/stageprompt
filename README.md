@@ -5,6 +5,10 @@
 `stageprompt.js` is a JavaScript snippet for wiring up a user journey to an
 analytics service.
 
+## Download
+
+Latest version: [stageprompt.1.1.0.js](https://github.com/alphagov/stageprompt/releases/v1.1.0/1431/stageprompt.1.1.0.js)
+
 ## Dependencies
 
 - jQuery (currently mirroring the version from https://github.com/alphagov/static/tree/master/app/assets/javascripts/libs/jquery)
