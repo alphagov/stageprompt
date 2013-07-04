@@ -37,7 +37,7 @@ describe("stageprompt", function () {
       var spy = jasmine.createSpy();
       GOVUK.performance.stageprompt.setup(analyticsCallback);
 
-      expect(analyticsCallback).toHaveBeenCalledWith("test-journey:someStage");
+      expect(analyticsCallback).toHaveBeenCalledWith("test-journey", "someStage");
     });
 
     it("should send an event if the page has a data-journey tag on another tag", function () {
@@ -45,7 +45,7 @@ describe("stageprompt", function () {
 
       GOVUK.performance.stageprompt.setup(analyticsCallback);
 
-      expect(analyticsCallback).toHaveBeenCalledWith("test-journey:nextStep");
+      expect(analyticsCallback).toHaveBeenCalledWith("test-journey", "nextStep");
     });
 
     it("should send one event if the page has multiple elements with data-journey attribute", function () {
@@ -57,7 +57,46 @@ describe("stageprompt", function () {
       expect(analyticsCallback.callCount).toBe(1);
     });
 
-  })
+  });
+
+  describe("callback arguments", function() {
+
+    var analyticsCallback;
+
+    beforeEach(function () {
+      analyticsCallback = jasmine.createSpy();
+      $("<div id='sandbox'></div>").appendTo('body');
+    });
+
+    afterEach(function () {
+      $('#sandbox').remove();
+      $('[data-journey]').removeAttr('data-journey');
+    });
+
+    it("should pass action parts as separate arguments to the callback", function() {
+      $('#sandbox').attr('data-journey', 'part-1:part-2');
+
+      GOVUK.performance.stageprompt.setup(analyticsCallback);
+
+      expect(analyticsCallback).toHaveBeenCalledWith("part-1", "part-2");
+    });
+
+    it("should pass a single-part action as one argument", function() {
+      $('#sandbox').attr('data-journey', 'single-part');
+
+      GOVUK.performance.stageprompt.setup(analyticsCallback);
+
+      expect(analyticsCallback).toHaveBeenCalledWith("single-part");
+    });
+
+    it("should pass at most three arguments to the callback", function() {
+      $('#sandbox').attr('data-journey', 'part-1:part-2:part-3:additional-content');
+
+      GOVUK.performance.stageprompt.setup(analyticsCallback);
+
+      expect(analyticsCallback).toHaveBeenCalledWith("part-1", "part-2", "part-3:additional-content");
+    });
+  });
   
   describe("sending events for helper tags", function () {
     beforeEach(function () {
