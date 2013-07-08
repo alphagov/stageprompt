@@ -3,7 +3,7 @@ var GOVUK = GOVUK || {};
 GOVUK.performance = GOVUK.performance || {};
 
 GOVUK.performance.stageprompt = (function () {
-  var setup, setUpForGoogleAnalytics;
+  var setup, setupForGoogleAnalytics;
 
   setup = function (analyticsCallback) {
     var journeyStage = $('[data-journey]').attr('data-journey'),
@@ -12,11 +12,9 @@ GOVUK.performance.stageprompt = (function () {
       analyticsCallback(journeyStage);
     }
     
-    if (journeyHelpers.length) {
-      journeyHelpers.on('click', function (event) {
-        analyticsCallback($(this).data('journey-helper'));
-      });
-    }
+    journeyHelpers.on('click', function (event) {
+      analyticsCallback($(this).data('journey-helper'));
+    });
   };
   
   setupForGoogleAnalytics = function () {
