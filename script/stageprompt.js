@@ -1,3 +1,16 @@
+/* Stageprompt 2.0.1
+*  =================
+*
+*  What is it?       Stageprompt is code for wiring up an analytics service to a user journey
+*  How does it work? The user journey is described by adding data-journey attributes to tags in the html
+*                    the attribute values are then parsed and use to fire a callback sending data to
+*                    Google Analytics or some other provider.
+*  Why use it?       Seperates the concerns of instumenting your user journey and sending that data
+*                    to your analytics provider. 
+*
+*  SEE HERE FOR MORE INFORMATION - https://github.com/alphagov/stageprompt
+*/
+
 var GOVUK = GOVUK || {};
 
 GOVUK.performance = GOVUK.performance || {};
