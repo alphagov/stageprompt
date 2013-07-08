@@ -3,17 +3,25 @@ var GOVUK = GOVUK || {};
 GOVUK.performance = GOVUK.performance || {};
 
 GOVUK.performance.stageprompt = (function () {
-  var setup, setupForGoogleAnalytics;
+
+  var setup, setupForGoogleAnalytics, splitAction;
+
+  splitAction = function (action) {
+    var parts = action.split(':');
+    if (parts.length <= 3) return parts;
+    return [parts.shift(), parts.shift(), parts.join(':')];
+  };
 
   setup = function (analyticsCallback) {
     var journeyStage = $('[data-journey]').attr('data-journey'),
-        journeyHelpers = $('[data-journey-helper]');
+        journeyHelpers = $('[data-journey-click]');
+
     if (journeyStage) {
-      analyticsCallback(journeyStage);
+      analyticsCallback.apply(null, splitAction(journeyStage));
     }
     
     journeyHelpers.on('click', function (event) {
-      analyticsCallback($(this).data('journey-helper'));
+      analyticsCallback.apply(null, splitAction($(this).data('journey-click')));
     });
   };
   
@@ -27,6 +35,6 @@ GOVUK.performance.stageprompt = (function () {
   };
 }());
 
-GOVUK.performance.sendGoogleAnalyticsEvent = function (action) {
-  _gaq.push(['_trackEvent', 'stagePrompt', action, undefined, undefined, true]);
+GOVUK.performance.sendGoogleAnalyticsEvent = function (category, event, label) {
+  _gaq.push(['_trackEvent', category, event, label, undefined, true]);
 };

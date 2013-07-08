@@ -5,14 +5,31 @@
 `stageprompt.js` is a JavaScript snippet for wiring up a user journey to an
 analytics service.
 
+## Download
+
+Latest version: [stageprompt.2.0.0.js](https://github.com/alphagov/stageprompt/releases/v2.0.0/1799/stageprompt.2.0.0.js)
+
 ## Dependencies
 
 - jQuery (currently mirroring the version from https://github.com/alphagov/static/tree/master/app/assets/javascripts/libs/jquery)
 
 ## Running tests
 
-Open `unit_tests.html` in your desired browser. You might want to serve files
-up via `python -m SimpleHTTPServer` for a more realistic testing environment.
+You can run the tests using [Rake](http://rake.rubyforge.org/) and [Jasmine](http://pivotal.github.io/jasmine/). 
+
+Setup your environment:
+ 
+* Install Ruby 1.9.3
+* in the project folder, run: `bundle install`
+
+To run the tests in a browser:
+
+* run: `bundle exec rake jasmine`
+* open in your browser: [http://localhost:8888](http://localhost:8888)
+
+To run the tests from the command line:
+
+* run: `bundle exec rake jasmine:ci`
 
 ## Setup
 
@@ -23,9 +40,9 @@ Include `stageprompt.js` in your HTML, and set it up by providing a function to 
 Or configure the callback yourself. In the example below an event is sent to Google Analytics for each stage.
 
     $(function () {
-      GOVUK.performance.stageprompt.setup(function (journeyStage) {
-        _gaq.push(['_trackEvent', journeyStage , 'n/a', undefined, undefined, true]);
-      })
+      GOVUK.performance.stageprompt.setup(function (category, event, label) {
+        _gaq.push(['_trackEvent', category, event, label, undefined, true]);
+      });
     });
 
 ## Sending events when a user reaches a page in your user journey
@@ -52,9 +69,9 @@ user is redirected back to GOV.UK at `/pay-register-birth-abroad/done`:
         [...]
     </div>
 
-## Sending events when a user uses help buttons
+## Sending events when a user clicks on a page element
 
-Add `data-journey-helper` attributes to the HTML for your help link or button. This will only work if the user is
+Add `data-journey-click` attributes to the element clicked by the user. This will only work if the user is
 not sent to a new page on click. Example:
 
-    <a class="help-button" href="#" data-journey-helper="stage:journey:helper">See more info...</a>
+    <a class="help-button" href="#" data-journey-click="stage:help:info">See more info...</a>
