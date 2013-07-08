@@ -12,11 +12,9 @@ GOVUK.performance.stageprompt = (function () {
       analyticsCallback(journeyStage);
     }
     
-    if (journeyHelpers.length) {
-      journeyHelpers.on('click', function (event) {
-        analyticsCallback($(this).data('journey-helper'));
-      });
-    }
+    journeyHelpers.on('click', function (event) {
+      analyticsCallback($(this).data('journey-helper'));
+    });
   };
   
   setupForGoogleAnalytics = function () {
