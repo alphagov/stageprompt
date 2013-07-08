@@ -1,4 +1,4 @@
-// Stageprompt 2.0
+// Stageprompt 2.0.1
 // 
 // See: https://github.com/alphagov/stageprompt
 // 
