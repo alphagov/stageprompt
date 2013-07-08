@@ -7,7 +7,7 @@ analytics service.
 
 ## Download
 
-Latest version: [stageprompt.2.0.0.js](https://github.com/alphagov/stageprompt/releases/v2.0.0/1799/stageprompt.2.0.0.js)
+Latest version: [stageprompt.2.0.1.js](https://github.com/alphagov/stageprompt/releases/2.0.1/2460/stageprompt.2.0.1.js)
 
 ## Dependencies
 
