@@ -11,6 +11,7 @@ Latest version: [stageprompt.2.0.1.js](https://github.com/alphagov/stageprompt/r
 
 ## Dependencies
 
+- An analytics product, such as Google Analytics or Piwik
 - jQuery (currently mirroring the version from https://github.com/alphagov/static/tree/master/app/assets/javascripts/libs/jquery)
 
 ## Running tests
@@ -33,17 +34,29 @@ To run the tests from the command line:
 
 ## Setup
 
-Include `stageprompt.js` in your HTML, and set it up by providing a function to be called at each stage. Either use the "out of the box" setup
+Include `stageprompt.js` in your HTML, and set it up by providing a function to be called at each stage.
+The function should be added to the DOM onLoad event handler.
+
+Either use the "out of the box" setup for Google Analytics:
 
     GOVUK.performance.stageprompt.setupForGoogleAnalytics();
 
-Or configure the callback yourself. In the example below an event is sent to Google Analytics for each stage.
+Or configure the callback yourself. In the example below an event is sent to Google Analytics for each stage:
 
     $(function () {
       GOVUK.performance.stageprompt.setup(function (category, event, label) {
         _gaq.push(['_trackEvent', category, event, label, undefined, true]);
       });
     });
+
+If you are using another analytics product, such as Piwik, you can configure the callback accordingly:
+
+    $(function () {
+      GOVUK.performance.stageprompt.setup(function (category, event, label) {
+        // Code to send to your Piwik account
+      });
+    });
+
 
 ## Sending events when a user reaches a page in your user journey
 
