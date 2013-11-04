@@ -20,6 +20,10 @@
 //   Sending events on click:
 //
 //     <a class="help-button" href="#" data-journey-click="stage:help:info">See more info...</a>
+//
+//   google analytics event tracking structure:
+//
+//     _trackEvent(category, action, opt_label, opt_value, opt_noninteraction)
 
 var GOVUK = GOVUK || {};
 
@@ -55,6 +59,15 @@ GOVUK.performance.stageprompt = (function () {
     if(options.trackClicks){
       journeyHelpers.on('click', function (event) {
         analyticsCallback.apply(null, splitAction($(this).data('journey-click')));
+      });
+    }
+
+    if(options.trackExits && options.trackJourney && journeyStage){
+      var exit = splitAction(journeyStage);
+      exit.push('exit');
+
+      $(window).bind('beforeunload', function() {
+        analyticsCallback.apply(null, exit);
       });
     }
 
