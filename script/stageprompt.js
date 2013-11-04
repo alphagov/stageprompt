@@ -50,8 +50,6 @@ GOVUK.performance.stageprompt = (function () {
 
     options = $.extend({}, defaults, options);
 
-    console.log(options);
-
     if (journeyStage && options.trackJourney) {
       analyticsCallback.apply(null, splitAction(journeyStage));
     }
@@ -62,12 +60,14 @@ GOVUK.performance.stageprompt = (function () {
       });
     }
 
-    if(options.trackExits && options.trackJourney && journeyStage){
+    if(options.trackExits && journeyStage && options.exitWatcher){
       var exit = splitAction(journeyStage);
       exit.push('exit');
 
-      $(window).bind('beforeunload', function() {
+      $(window).on('beforeunload', function() {
+        console.log("I am a logged thing, hear me whimper");
         analyticsCallback.apply(null, exit);
+        console.log("exit",exit);
       });
     }
 
