@@ -27,7 +27,12 @@ GOVUK.performance = GOVUK.performance || {};
 
 GOVUK.performance.stageprompt = (function () {
 
-  var setup, setupForGoogleAnalytics, splitAction;
+  var setup, setupForGoogleAnalytics, splitAction,
+      defaults = {
+        trackClicks : true,
+        trackExits  : true,
+        trackJourney: true
+      };
 
   splitAction = function (action) {
     var parts = action.split(':');
@@ -35,21 +40,28 @@ GOVUK.performance.stageprompt = (function () {
     return [parts.shift(), parts.shift(), parts.join(':')];
   };
 
-  setup = function (analyticsCallback) {
+  setup = function (analyticsCallback, options) {
     var journeyStage = $('[data-journey]').attr('data-journey'),
         journeyHelpers = $('[data-journey-click]');
 
-    if (journeyStage) {
+    options = $.extend({}, defaults, options);
+
+    console.log(options);
+
+    if (journeyStage && options.trackJourney) {
       analyticsCallback.apply(null, splitAction(journeyStage));
     }
 
-    journeyHelpers.on('click', function (event) {
-      analyticsCallback.apply(null, splitAction($(this).data('journey-click')));
-    });
+    if(options.trackClicks){
+      journeyHelpers.on('click', function (event) {
+        analyticsCallback.apply(null, splitAction($(this).data('journey-click')));
+      });
+    }
+
   };
 
-  setupForGoogleAnalytics = function () {
-    setup(GOVUK.performance.sendGoogleAnalyticsEvent);
+  setupForGoogleAnalytics = function (options) {
+    setup(GOVUK.performance.sendGoogleAnalyticsEvent, options);
   };
 
   return {
