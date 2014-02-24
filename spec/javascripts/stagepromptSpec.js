@@ -154,7 +154,7 @@ describe("stageprompt", function () {
     
     it("should get set up to send events to google analytics", function () {
       $('#sandbox').append('<div id="box" data-journey="thisIsATest"></div>');
-      
+
       GOVUK.performance.stageprompt.setupForGoogleAnalytics();
       
       expect(_gaq.push).toHaveBeenCalled();
