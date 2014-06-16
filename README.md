@@ -124,9 +124,9 @@ if it the link is off site.
 
 The event identifier is split up and stored in the following fields.
 
-- the transaction identifier is stored in the category field
-- the event type is stored in the event field
-- the event identifier is stored in the label field
+- the transaction identifier is stored in the event category field
+- the event type is stored in the event action field
+- the event identifier is stored in the event label field
 
 ## Backdrop integration
 
