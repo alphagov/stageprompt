@@ -113,14 +113,14 @@ User click events are fired when the annotated element is clicked. Add a
 
 For example:
 
-    <a class="help-button" href="#" data-journey-click="stage:help:info">See more info...</a>
+    <a class="help-button" href="#" data-journey-click="carers-allowance:help:info">See more info...</a>
 
 Note that if the link causes the user to go to another page the results may not
 be as expected. For example, with Google Analytics the event will be fired from
 the subsequent page if that page is using the same GA account, or not at all
 if it the link is off site.
 
-## Google Analytics itegration
+## Google Analytics integration
 
 The event identifier is split up and stored in the following fields.
 
