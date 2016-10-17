@@ -18,7 +18,7 @@ Latest version: [stageprompt.2.0.1.js](https://github.com/alphagov/stageprompt/r
 
 ## Running tests
 
-You can run the tests using [Rake](http://rake.rubyforge.org/) and [Jasmine](http://pivotal.github.io/jasmine/). 
+You can run the tests using [Rake](http://rake.rubyforge.org/) and [Jasmine](https://jasmine.github.io/). 
 
 Setup your environment:
  
